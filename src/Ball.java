@@ -33,7 +33,7 @@ public class Ball {
 
     }
 
-    /* public void New() {
+     public void New() {
          if (x + dx <= 0 || x + dx >= 465) {
              dx = -dx;
          } else {
@@ -47,7 +47,6 @@ public class Ball {
              }
          }
      }
- */
     // return the current x-axis coordinate of the top left corner of the ball
     public int getX() {
         return x;
@@ -63,4 +62,11 @@ public class Ball {
         return diameter;
     }
 
+    public int getWidth() {
+        return dx;
+    }
+
+    public int getHeight() {
+        return dy;
+    }
 }

@@ -14,28 +14,21 @@ public class Main extends JPanel {
 
 
         super.paintComponent(g);
-        for (int ii = 0; ii > bricksArray.size(); ii++) {
-            g.fillRect(bricksArray.get(ii).getX(), bricksArray.get(ii).getY(), bricksArray.get(ii).getHeight(), bricksArray.get(ii).getWidth());
-        }
-    }
-
-    public void animate() {
-        ballsOnScreen.move();
-    }
-
-    public Main() {
-
-        super();
         ballsOnScreen = new Ball(170, 190);
         bricksArray = new ArrayList<ArrayList<Brick>>();
         for (int i = 0; i < 3; i++) {
             ArrayList<Brick> row = new ArrayList<Brick>();
             for (int j = 0; j < 700; j++) {
                 row.add(new Brick(j * 32, i * 22 + 56, 30, 20));
+                g.fillRect(bricksArray.get(j).get(i).getX(), bricksArray.get(i).get(j).getY(), bricksArray.get(i).get(j).getLength(), bricksArray.get(i).get(j).getWidth());
                 System.out.println("Brick(" + j * 32 + " , " + i * 22 + "30,20");
             }
             bricksArray.add(row);
         }
+    }
+
+    public void animate() {
+        ballsOnScreen.move();
     }
 
 
@@ -51,27 +44,16 @@ public class Main extends JPanel {
         int bWidth = ba.getWidth();
         for (int x = 0; x <= 600; x += 55) {
             for (int y = 0; y <= 100; y += 25) {
-                if (bX - bWidth <= x && bX + bWidth >= x && bY - bHeight <= y && bY + bHeight >= y) {
-                    ba.setXVel(6);
-                }
+                if (bX - bWidth <= x && bX + bWidth >= x && bY - bHeight <= y && bY + bHeight >= y) ;
             }
         }
     }
-
-    public void paint(Graphics g) {
-        for (int x = 0; x <= 800; x += 55) {
-            for (int y = 0; y <= 100; y += 25) {
-                g.fillRect(x, y, 50, 20);
-            }
-        }
-    }
-
-
 
 
     public static void main(String[] args) throws Exception {
 
         JFrame theApp = new JFrame();
+
 
         Main theDisplay = new Main();
 
@@ -88,7 +70,9 @@ public class Main extends JPanel {
 
         while (true) {
 
-            theDisplay.animate();    // originally forgot to invoke this method lol
+            theDisplay.animate();   // originally forgot to invoke this method lol
+
+            theDisplay.New();
 
             theApp.repaint();        // trigger the JPanel paintComponent() method to be called
 
