@@ -3,7 +3,7 @@ public class Brick {
     public int x, y;
     public int length, width;
 
-    public Brick(int x, int y, int length, int width) {
+    public Brick( int x, int y, int length, int width) {
         length = 4;
         width = 4;
     }

@@ -1,30 +1,21 @@
 import javax.swing.*;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import  java.util.ArrayList;
 
-public class Main extends JPanel {
+public class Main extends JPanel implements KeyListener {
     Ball ballsOnScreen;
     ArrayList<ArrayList<Brick>> bricksArray;
+    Ball theBall;
+    Brick theBrick;
 
 
     @Override
 
     protected void paintComponent(Graphics g) {
-
-
         super.paintComponent(g);
-        ballsOnScreen = new Ball(170, 190);
-        bricksArray = new ArrayList<ArrayList<Brick>>();
-        for (int i = 0; i < 3; i++) {
-            ArrayList<Brick> row = new ArrayList<Brick>();
-            for (int j = 0; j < 700; j++) {
-                row.add(new Brick(j * 32, i * 22 + 56, 30, 20));
-                g.fillRect(bricksArray.get(j).get(i).getX(), bricksArray.get(i).get(j).getY(), bricksArray.get(i).get(j).getLength(), bricksArray.get(i).get(j).getWidth());
-                System.out.println("Brick(" + j * 32 + " , " + i * 22 + "30,20");
-            }
-            bricksArray.add(row);
-        }
     }
 
     public void animate() {
@@ -32,11 +23,10 @@ public class Main extends JPanel {
     }
 
 
-    public void update(Ball ba) {
-        collision(ba);
-    }
+    public void update() {
+        collision(ballsOnScreen);
 
-
+}
     public void collision(Ball ba) {
         int bX = ba.getX();
         int bY = ba.getY();
@@ -49,11 +39,26 @@ public class Main extends JPanel {
         }
     }
 
+    public Main(){
+        super();
+    ballsOnScreen = new Ball(170, 190);
+    bricksArray = new ArrayList<ArrayList<Brick>>();
+        for (int i = 0; i < 3; i++) {
+        ArrayList<Brick> row = new ArrayList<Brick>();
+            ArrayList<ArrayList<Brick>> bricksArray = new ArrayList<ArrayList<Brick>>();
+
+        for (int j = 0; j < 700; j++) {
+            row.add(new Brick(j * 32, i * 22 + 56, 30, 20));
+            System.out.println("Brick(" + j * 32 + " , " + i * 22 + "30,20");
+        }
+        bricksArray.add(row);
+    }
+}
+
 
     public static void main(String[] args) throws Exception {
 
         JFrame theApp = new JFrame();
-
 
         Main theDisplay = new Main();
 
@@ -72,12 +77,32 @@ public class Main extends JPanel {
 
             theDisplay.animate();   // originally forgot to invoke this method lol
 
-            theDisplay.New();
+            theDisplay.update();
 
             theApp.repaint();        // trigger the JPanel paintComponent() method to be called
 
             Thread.sleep(20);        // go to sleep for 20 milliseconds
 
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_0) {
+            /* go to this website to find out what you need to do for the panel.... it actually looks easier than the
+             bricks in all honesty https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
+             */
+
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
