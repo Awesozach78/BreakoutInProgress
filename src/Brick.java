@@ -19,7 +19,7 @@ public class Brick {
         return width;
     }
 
-    public int getLength() {
+    public int getHeight() {
         return length;
     }
 }

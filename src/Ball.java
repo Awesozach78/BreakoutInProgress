@@ -33,20 +33,6 @@ public class Ball {
 
     }
 
-     public void New() {
-         if (x + dx <= 0 || x + dx >= 465) {
-             dx = -dx;
-         } else {
-             if (y + dy <= 0) {
-                 dy = -dy;
-             } else {
-                 if (y + dy >= 465) {
-                     dx = 0;
-                     dy = 0;
-                 }
-             }
-         }
-     }
     // return the current x-axis coordinate of the top left corner of the ball
     public int getX() {
         return x;
