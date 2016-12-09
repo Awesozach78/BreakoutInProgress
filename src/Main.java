@@ -1,15 +1,16 @@
-import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import  java.util.ArrayList;
+import java.util.ArrayList;
 
 
 public class Main extends JPanel implements KeyListener {
     ArrayList<Ball> ballsOnScreen;
     ArrayList<ArrayList<Brick>> bricksArray;
+    ArrayList<Paddle> Paddle;
+    Paddle paddle;
 
 
 
@@ -18,6 +19,10 @@ public class Main extends JPanel implements KeyListener {
     protected void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
+        for( int i=0; i >5; i++)
+            g.fillOval(Paddle.get(i).getX(), Paddle.get(i).getY(), Paddle.get(i).getWidth(), Paddle.get(i).getHeight);
+
         for( int i=0; i >5; i++)
         g.fillOval(ballsOnScreen.get(i).getX(), ballsOnScreen.get(i).getY(), ballsOnScreen.get(i).getDiameter(), ballsOnScreen.get(i).getDiameter());
 
@@ -99,20 +104,29 @@ public class Main extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            paddle.leftPressed = true;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                paddle.rightPressed = true;
+            }
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_0) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            paddle.leftPressed = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            paddle.rightPressed = false;
+        }
+    }
+
 
 
             /* go to this website to find out what you need to do for the panel.... it actually looks easier than the
              bricks in all honesty https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
              */
-
-        }
-    }
 
     @Override
     public void keyReleased(KeyEvent e) {
